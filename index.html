@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Mentoría | Refuerzo Académico</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="topbar" role="banner">
+    <h1>Mentoría · Refuerzo Académico</h1>
+    <button id="resetBtn" class="btn ghost" aria-label="Reiniciar datos">Reiniciar</button>
+  </header>
+
+  <main class="container" role="main">
+    <!-- Panel: Perfil -->
+    <section class="card" aria-labelledby="perfil-title">
+      <h2 id="perfil-title">Perfil del alumno</h2>
+      <form id="perfilForm" class="grid-2">
+        <label>
+          Nombre del alumno
+          <input type="text" id="alumnoNombre" placeholder="Ej.: Ana Torres" required />
+        </label>
+        <label>
+          Curso / Asignatura
+          <input type="text" id="alumnoCurso" placeholder="Ej.: Matemática — Aritmética" />
+        </label>
+        <label>
+          Profesor mentor
+          <input type="text" id="mentorNombre" placeholder="Ej.: Prof. Helen" />
+        </label>
+        <label>
+          Nivel / Grado
+          <input type="text" id="alumnoNivel" placeholder="Ej.: 1° Secundaria" />
+        </label>
+        <label class="full">
+          Observaciones iniciales
+          <textarea id="observaciones" rows="3" placeholder="Breve diagnóstico, dificultades detectadas, fortalezas…"></textarea>
+        </label>
+        <div class="actions full">
+          <button class="btn primary" type="submit">Guardar perfil</button>
+        </div>
+      </form>
+    </section>
+
+    <!-- Panel: Metas -->
+    <section class="card" aria-labelledby="metas-title">
+      <h2 id="metas-title">Metas de aprendizaje</h2>
+      <form id="metaForm" class="grid-3">
+        <label class="full">Nueva meta
+          <input type="text" id="metaTexto" placeholder="Ej.: Dominar operaciones con fracciones" />
+        </label>
+        <label>
+          Tipo
+          <select id="metaTipo">
+            <option value="corto">Corto plazo</option>
+            <option value="medio">Medio plazo</option>
+            <option value="largo">Largo plazo</option>
+          </select>
+        </label>
+        <label>
+          Fecha objetivo
+          <input type="date" id="metaFecha" />
+        </label>
+        <div class="actions full">
+          <button class="btn" type="submit">Agregar meta</button>
+        </div>
+      </form>
+      <ul id="listaMetas" class="list"></ul>
+    </section>
+
+    <!-- Panel: Tareas & progreso -->
+    <section class="card" aria-labelledby="tareas-title">
+      <h2 id="tareas-title">Tareas de reforzamiento</h2>
+      <form id="tareaForm" class="grid-3">
+        <label class="full">Descripción
+          <input type="text" id="tareaTexto" placeholder="Ej.: 10 ejercicios de fracciones (pág. 23)" />
+        </label>
+        <label>
+          Dificultad
+          <select id="tareaNivel">
+            <option value="Fácil">Fácil</option>
+            <option value="Media">Media</option>
+            <option value="Difícil">Difícil</option>
+          </select>
+        </label>
+        <label>
+          Fecha límite
+          <input type="date" id="tareaFecha" />
+        </label>
+        <div class="actions full">
+          <button class="btn" type="submit">Agregar tarea</button>
+        </div>
+      </form>
+
+      <div class="progressWrap">
+        <div class="progressInfo">
+          <span>Progreso</span>
+          <strong id="progressPct">0%</strong>
+        </div>
+        <div class="progress" aria-label="Progreso de tareas" aria-valuemin="0" aria-valuemax="100">
+          <div id="progressBar" class="progressBar" style="width:0%"></div>
+        </div>
+      </div>
+
+      <ul id="listaTareas" class="list list--tasks"></ul>
+    </section>
+
+    <!-- Panel: Sesiones -->
+    <section class="card" aria-labelledby="sesiones-title">
+      <h2 id="sesiones-title">Sesiones de mentoría</h2>
+      <form id="sesionForm" class="grid-3">
+        <label>
+          Fecha
+          <input type="date" id="sesionFecha" required />
+        </label>
+        <label>
+          Hora
+          <input type="time" id="sesionHora" />
+        </label>
+        <label>
+          Modalidad
+          <select id="sesionModalidad">
+            <option value="Presencial">Presencial</option>
+            <option value="Virtual">Virtual</option>
+          </select>
+        </label>
+        <label class="full">
+          Objetivo de la sesión
+          <input type="text" id="sesionObjetivo" placeholder="Ej.: Repasar suma y resta de fracciones" />
+        </label>
+        <div class="actions full">
+          <button class="btn" type="submit">Programar</button>
+        </div>
+      </form>
+
+      <ul id="listaSesiones" class="list"></ul>
+    </section>
+
+    <!-- Panel: Recursos -->
+    <section class="card" aria-labelledby="recursos-title">
+      <h2 id="recursos-title">Recursos</h2>
+      <form id="recursoForm" class="grid-3">
+        <label class="full">Título
+          <input type="text" id="recursoTitulo" placeholder="Video de fracciones · Khan Academy" />
+        </label>
+        <label class="full">URL
+          <input type="url" id="recursoUrl" placeholder="https://…" />
+        </label>
+        <div class="actions full">
+          <button class="btn" type="submit">Agregar recurso</button>
+        </div>
+      </form>
+      <ul id="listaRecursos" class="list"></ul>
+    </section>
+
+    <!-- Panel: Notas rápidas -->
+    <section class="card" aria-labelledby="notas-title">
+      <h2 id="notas-title">Notas rápidas</h2>
+      <form id="notaForm" class="grid-2">
+        <label class="full">
+          Escribe una nota (máx. 300 caracteres)
+          <textarea id="notaTexto" maxlength="300" rows="2" placeholder="Ej.: Ana mejoró al explicar en voz alta el procedimiento."></textarea>
+        </label>
+        <div class="actions full">
+          <button class="btn" type="submit">Guardar nota</button>
+        </div>
+      </form>
+      <ul id="listaNotas" class="list"></ul>
+    </section>
+  </main>
+
+  <footer class="footer" role="contentinfo">
+    <small>Hecho con ❤️ para acompañar el aprendizaje · Datos guardados en tu navegador.</small>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
